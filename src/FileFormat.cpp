@@ -51,7 +51,8 @@ FileFormat fromString(const std::string& name)
         { "dat",  FileFormat::Dat  },
         { "json", FileFormat::Json },
         { "txt",  FileFormat::Txt  },
-        { "png",  FileFormat::Png  }
+        { "png",  FileFormat::Png  },
+        { "kajam",  FileFormat::Kajam  }
     };
 
     const auto i = map.find(key);

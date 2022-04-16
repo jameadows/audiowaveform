@@ -40,6 +40,7 @@
 #include "WaveformRescaler.h"
 #include "WaveformUtil.h"
 #include "WavFileWriter.h"
+#include "KajamAudioFileReader.h"
 
 #include <boost/filesystem.hpp>
 #include <boost/format.hpp>
@@ -104,6 +105,10 @@ static std::unique_ptr<AudioFileReader> createAudioFileReader(
         input_format == FileFormat::Ogg ||
         input_format == FileFormat::Opus) {
         reader.reset(new SndFileAudioFileReader);
+    }
+    else if(input_format == FileFormat::Kajam)
+    {
+        reader.reset((new KajamAudioFileReader));
     }
     else if (input_format == FileFormat::Mp3) {
         reader.reset(new Mp3AudioFileReader);
@@ -550,6 +555,7 @@ bool OptionHandler::run(const Options& options)
                   input_format == FileFormat::Wav ||
                   input_format == FileFormat::Flac ||
                   input_format == FileFormat::Ogg ||
+                  input_format == FileFormat::Kajam ||
                   input_format == FileFormat::Opus) &&
                  FileFormat::isSupported(input_format) &&
                  (output_format == FileFormat::Dat ||

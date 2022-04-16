@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 //
-// Copyright 2021 BBC Research and Development
+// Copyright 2013-2018 BBC Research and Development
 //
 // Author: Chris Needham
 //
@@ -21,39 +21,34 @@
 //
 //------------------------------------------------------------------------------
 
-#if !defined(INC_FILE_FORMAT_H)
-#define INC_FILE_FORMAT_H
+#if !defined(INC_KAJAM_AUDIO_FILE_READER_H)
+#define INC_KAJAM_AUDIO_FILE_READER_H
 
 //------------------------------------------------------------------------------
+
+#include "AudioFileReader.h"
+#include "SndFileAudioFileReader.h"
 
 #include <string>
 
-//------------------------------------------------------------------------------
-
-namespace FileFormat {
-    enum FileFormat
-    {
-        Unknown,
-        Mp3,
-        Wav,
-        Flac,
-        Ogg,
-        Opus,
-        Dat,
-        Json,
-        Txt,
-        Png,
-        Kajam
-    };
-
-    FileFormat fromString(const std::string& name);
-    std::string getFileExt(FileFormat file_format);
-    std::string toString(FileFormat file_format);
-    bool isSupported(FileFormat file_format);
-}
+#include <sndfile.h>
 
 //------------------------------------------------------------------------------
 
-#endif // #if !defined(INC_FILE_FORMAT_H)
+class KajamAudioFileReader : public SndFileAudioFileReader {
+public:
+    KajamAudioFileReader();
+
+    KajamAudioFileReader(const KajamAudioFileReader &) = delete;
+
+    KajamAudioFileReader operator=(const KajamAudioFileReader &) = delete;
+
+public:
+    virtual bool open(const char *input_filename, bool show_info = true);
+};
+
+//------------------------------------------------------------------------------
+
+#endif // #if !defined(INC_KAJAM_AUDIO_FILE_READER_H)
 
 //------------------------------------------------------------------------------

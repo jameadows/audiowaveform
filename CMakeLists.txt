@@ -255,7 +255,7 @@ set(MODULES
 set(SRCS
     src/Main.cpp
     ${MODULES}
-)
+        src/KajamAudioFileReader.cpp)
 
 add_executable(audiowaveform ${SRCS})
 

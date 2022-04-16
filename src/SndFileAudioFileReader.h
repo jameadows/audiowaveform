@@ -34,26 +34,27 @@
 
 //------------------------------------------------------------------------------
 
-class SndFileAudioFileReader : public AudioFileReader
-{
-    public:
-        SndFileAudioFileReader();
-        virtual ~SndFileAudioFileReader();
+class SndFileAudioFileReader : public AudioFileReader {
+public:
+    SndFileAudioFileReader();
 
-        SndFileAudioFileReader(const SndFileAudioFileReader&) = delete;
-        SndFileAudioFileReader& operator=(const SndFileAudioFileReader&) = delete;
+    virtual ~SndFileAudioFileReader();
 
-    public:
-        virtual bool open(const char* input_filename, bool show_info = true);
+    SndFileAudioFileReader(const SndFileAudioFileReader &) = delete;
 
-        virtual bool run(AudioProcessor& processor);
+    SndFileAudioFileReader &operator=(const SndFileAudioFileReader &) = delete;
 
-    private:
-        void close();
+public:
+    virtual bool open(const char *input_filename, bool show_info = true);
 
-    private:
-        SNDFILE* input_file_;
-        SF_INFO info_;
+    virtual bool run(AudioProcessor &processor);
+
+protected:
+    void close();
+
+protected:
+    SNDFILE *input_file_;
+    SF_INFO info_;
 };
 
 //------------------------------------------------------------------------------
